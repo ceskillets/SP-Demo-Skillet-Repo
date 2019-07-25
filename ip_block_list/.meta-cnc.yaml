@@ -1,0 +1,80 @@
+# skillet preamble information used by panhandler
+# ---------------------------------------------------------------------
+# unique snippet name
+name: IP_Block_List
+# label used for menu selection
+label: IP Block List
+description: descibe the describer
+
+# type of device configuration
+# common types are panorama, panos, and template
+# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
+type: panos
+# preload static or default-based templates
+extends:
+
+# grouping of like snippets for dynamic menu creation in panhandler
+labels:
+  collection:
+    - myCollection
+
+# ---------------------------------------------------------------------
+# end of preamble section
+
+# variables section
+# ---------------------------------------------------------------------
+# variables used in the configuration templates
+# type_hint defines the form field used by panhandler
+# type_hints can be text, ip_address, or dropdown
+variables:
+  - name: edl_name
+    description: Name of EDL
+    default: Enter EDL name here
+    type_hint: text
+  - name: edl_description
+    description: Description of EDL
+    default: Please enter a description end user person
+    type_hint: text
+  - name: url
+    description: Source URL
+    default: http://goinnowhere.com
+    type_hint: text
+  - name: tag_name
+    description: Tag Name
+    default: tagName
+    type_hint: text
+  - name: tag_color
+    description: Choose Color
+    default: Red
+    type_hint: dropdown
+    dd_list:
+      - key: Red
+        value: color1
+      - key: Blue
+        value: color3
+      - key: Green
+        value: color22
+  - name: tag_description
+    description: Tag Description
+    default: Text here
+    type_hint: text
+  
+# ---------------------------------------------------------------------
+# end of variables section
+
+# snippets section
+# ---------------------------------------------------------------------
+# snippets used for api configuration including xpath and element as file name
+# files will load in the order listed
+snippets:
+  - name: tag
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/tag
+    file: tag.xml
+  - name: edl_list
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/external-list
+    file: edl.xml
+  - name: security_rules
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules
+    file: security_rules.xml
+# ---------------------------------------------------------------------
+# end of snippets section

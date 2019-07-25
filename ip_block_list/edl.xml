@@ -1,0 +1,11 @@
+<entry name="{{ edl_name }}">
+    <type>
+        <ip>
+            <recurring>
+                <hourly/>
+            </recurring>
+            <description>{{ edl_description }}</description>
+            <url>{{ url }}</url>
+        </ip>
+    </type>
+</entry>
